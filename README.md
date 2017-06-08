@@ -12,7 +12,7 @@ class Person extends Dto
 
 ## available property names
 
-    $propertyNames = Person::getPropertyNames(); // [ 'name', 'surname', ];
+    Person::getPropertyNames(); // [ 'name', 'surname', ];
 
 ## properties accessibility
 
