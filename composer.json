@@ -1,0 +1,20 @@
+{
+    "name": "sensorario/dto",
+    "authors": [
+        {
+            "name": "Simone Gentili",
+            "email": "sensorario@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": ["src", "tests", "tests/resources"]
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "require": {
+        "phpunit/phpunit": "^6.2"
+    }
+}
