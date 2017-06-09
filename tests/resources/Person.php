@@ -2,7 +2,6 @@
 
 class Person extends Dto
 {
-    private $name;
-
-    private $surname;
+    public $name;
+    public $surname;
 }
