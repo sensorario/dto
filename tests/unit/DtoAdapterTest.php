@@ -8,10 +8,10 @@ class DtoAdapterTest extends TestCase
     {
         $propertyNames = Person::getPropertyNames();
 
-        $expectedProperties = [
+        $expectedProperties = array(
             'name',
             'surname',
-        ];
+        );
 
         $this->assertEquals(
             $expectedProperties,
@@ -21,9 +21,9 @@ class DtoAdapterTest extends TestCase
 
     public function testProvidePropertyViaGeneralGetter()
     {
-        $dto = Person::createFromArray([
+        $dto = Person::createFromArray(array(
             'name' => 'Simone',
-        ]);
+        ));
 
         $this->assertEquals(
             'Simone',
@@ -33,15 +33,15 @@ class DtoAdapterTest extends TestCase
 
     public function testDTOAcceptOnlyItsOwnProperties()
     {
-        $dto = Person::createFromArray([
+        $dto = Person::createFromArray(array(
             'name' => 'Simone',
             'sfadfsa' => 'Simone',
-        ]);
+        ));
 
-        $expectedProperties = [
+        $expectedProperties = array(
             'name' => 'Simone',
             'surname' => null,
-        ];
+        );
 
         $this->assertEquals(
             $expectedProperties,

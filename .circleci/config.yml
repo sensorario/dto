@@ -14,5 +14,6 @@ jobs:
             php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
             php composer-setup.php
             php -r "unlink('composer-setup.php');"
+      - run: rm composer.lock
       - run: php composer.phar install
       - run: ./bin/phpunit
