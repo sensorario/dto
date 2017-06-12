@@ -14,6 +14,11 @@ abstract class Dto
         return new static($properties);
     }
 
+    public function set($propertyName, $propertyValue)
+    {
+        $this->$propertyName = $propertyValue;
+    }
+
     public function get($propertyName)
     {
         return isset($this->properties[$propertyName])
@@ -24,7 +29,10 @@ abstract class Dto
     public static function getPropertyNames()
     {
         $reflected = new ReflectionClass(new static(array()));
-        $properties = $reflected->getProperties(ReflectionProperty::IS_PRIVATE);
+
+        $properties = $reflected->getProperties(
+            ReflectionProperty::IS_PUBLIC
+        );
 
         return array_map(function ($item) {
             return $item->getName();
@@ -40,5 +48,27 @@ abstract class Dto
         }
 
         return $properties;
+    }
+
+    public function __sleep()
+    {
+        foreach (self::getPropertyNames() as $propertyName) {
+            $this->set(
+                $propertyName,
+                $this->get($propertyName)
+            );
+        }
+
+        return self::getPropertyNames();
+    }
+
+    public function __wakeup()
+    {
+        foreach (self::getPropertyNames() as $propertyName) {
+            $this->properties[$propertyName] = $this->$propertyName;
+            $this->$propertyName = null;
+        }
+
+        return self::getPropertyNames();
     }
 }
