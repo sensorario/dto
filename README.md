@@ -5,8 +5,8 @@ Given a Dto like this:
 ```
 class Person extends Dto
 {
-    private $name;
-    private $surname;
+    public $name;
+    public $surname;
 }
 ```
 
@@ -24,7 +24,7 @@ class Person extends Dto
 
     $dto = Person::createFromArray([
           'name' => 'Simone',
-          'sfadfsa' => 'Simone',
+          'surname' => 'Gentili',
     ]);
 
-    $dto->asArray(); // [ 'name' => 'Simone', 'surname' => null, ];
+    $dto->asArray(); // [ 'name' => 'Simone', 'surname' => 'Gentili', ];

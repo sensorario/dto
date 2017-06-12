@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class DtoAdapterTest extends TestCase
+class DtoTest extends TestCase
 {
     public function testProvideDtoPropertyNames()
     {
@@ -46,6 +46,31 @@ class DtoAdapterTest extends TestCase
         $this->assertEquals(
             $expectedProperties,
             $dto->asArray()
+        );
+    }
+
+    public function testSerializationKeepSameProperties()
+    {
+        $dto = Person::createFromArray(array(
+            'name' => 'Simone',
+            'surname' => 'Gentili',
+            'sadfasdrname' => 'Gentili',
+        ));
+
+        $serialized = serialize($dto);
+        $unserialized = unserialize($serialized);
+
+        $this->assertEquals(
+            $dto->asArray(),
+            $unserialized->asArray()
+        );
+
+        $this->assertEquals(
+            array(
+                'name' => 'Simone',
+                'surname' => 'Gentili',
+            ),
+            $unserialized->asArray()
         );
     }
 }
